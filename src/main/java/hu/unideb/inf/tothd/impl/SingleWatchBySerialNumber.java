@@ -10,6 +10,7 @@ import org.restlet.resource.ServerResource;
 import java.io.IOException;
 
 public class SingleWatchBySerialNumber extends ServerResource{
+
     @Get("json|xml")
     public Watch represent() {
         String serialNumber = getAttribute("serialNumber");

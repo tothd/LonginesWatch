@@ -29,7 +29,7 @@ public class LonginesWatchApplication extends Application {
     public Restlet createInboundRoot() {
         IMRouter router = new IMRouter(getContext(), PATH, PORT);
         router.attach("/watch-selector/men/{name}", SingleWatchByName.class);
-        router.attach("{serialNumber}", SingleWatchBySerialNumber.class);
+        router.attach("/watchSearch?sn={serialNumber}", SingleWatchBySerialNumber.class);
         return router.getRouter();
     }
 

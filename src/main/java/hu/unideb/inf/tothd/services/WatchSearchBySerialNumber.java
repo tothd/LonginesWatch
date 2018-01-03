@@ -13,12 +13,12 @@ public class WatchSearchBySerialNumber {
     }
 
     public Watch doSearch(String serialNumber) throws IOException {
-
-        Document doc = Jsoup.connect(SEARCH_URI+serialNumber).userAgent("Mozzila").get();
+        String url =SEARCH_URI+serialNumber;
+        Document doc = Jsoup.connect(url).userAgent("Mozzila").get();
 
         String link = doc.select("div.product-grid-container > a").get(0).attr("abs:href");
         SingleWatchService singleWatchService = new SingleWatchService();
-        return singleWatchService.doSearch(link);
+        return singleWatchService.doSearch(link.replace("http://shop.us.longines.com",""));
     }
 
 }
