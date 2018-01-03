@@ -1,0 +1,24 @@
+package hu.unideb.inf.tothd.services;
+
+import hu.unideb.inf.tothd.model.Watch;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
+import java.io.IOException;
+
+public class WatchSearchBySerialNumber {
+    private static String SEARCH_URI = "http://shop.us.longines.com/catalogsearch/result/?q=";
+
+    public WatchSearchBySerialNumber() {
+    }
+
+    public Watch doSearch(String serialNumber) throws IOException {
+
+        Document doc = Jsoup.connect(SEARCH_URI+serialNumber).userAgent("Mozzila").get();
+
+        String link = doc.select("div.product-grid-container > a").get(0).attr("abs:href");
+        SingleWatchService singleWatchService = new SingleWatchService();
+        return singleWatchService.doSearch(link);
+    }
+
+}
