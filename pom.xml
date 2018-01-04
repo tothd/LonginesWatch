@@ -70,11 +70,6 @@
             <version>3.6</version>
             <scope>compile</scope>
         </dependency>
-        <dependency>
-            <groupId>net.sourceforge.htmlunit</groupId>
-            <artifactId>htmlunit</artifactId>
-            <version>2.28</version>
-        </dependency>
 
     </dependencies>
 
@@ -101,7 +96,7 @@
                             <archive>
                                 <manifest>
                                     <mainClass>
-                                        hu.unideb.inf.tothd.LonginesWatchApplication
+                                        hu.unideb.inf.tothd.Application
                                     </mainClass>
                                 </manifest>
                             </archive>
@@ -128,6 +123,8 @@
                 <configuration>
                     <sources>
                         <source>src/main/java/hu/unideb/inf/tothd/model/Watch.java</source>
+                        <source>src/main/java/hu/unideb/inf/tothd/model/SearchResultItem.java</source>
+                        <source>src/main/java/hu/unideb/inf/tothd/model/SearchResults.java</source>
                     </sources>
                 </configuration>
             </plugin>

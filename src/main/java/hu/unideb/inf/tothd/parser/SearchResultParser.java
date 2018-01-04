@@ -13,18 +13,20 @@ import java.math.BigDecimal;
 import java.util.LinkedList;
 import java.util.List;
 
-public class WatchSearchResultParser {
+public class SearchResultParser {
 
     private static final String currency = "USD";
 
     public static final int MAX_ITEMS = 60;
+    public static final int FROM = 1;
+    public static final int MAXIMUM_WATCH_IN_ONE_PAGE = 35;
 
     private int maxItems = MAX_ITEMS;
 
-    public WatchSearchResultParser() {
+    public SearchResultParser() {
     }
 
-    public WatchSearchResultParser(int maxItems) {
+    public SearchResultParser(int maxItems) {
         setMaxItems(maxItems);
     }
 
@@ -50,18 +52,26 @@ public class WatchSearchResultParser {
     }
 
     public SearchResults parse(Document doc) throws IOException {
+        int totalItems = getTotalItems(doc);
+
         SearchResults searchResults = new SearchResults();
-        searchResults.setItemsTotal(getTotalItems(doc));
+        searchResults.setItemsTotal(totalItems);
+        searchResults.setFrom(FROM);
+        if(totalItems>MAXIMUM_WATCH_IN_ONE_PAGE){
+            searchResults.setTo(MAXIMUM_WATCH_IN_ONE_PAGE);
+        }else{
+            searchResults.setTo(totalItems);
+        }
         searchResults.setItems(extractItems(doc));
         return searchResults;
     }
 
     private List<SearchResultItem> extractItems(Document doc) throws IOException {
         List<SearchResultItem> items = new LinkedList<SearchResultItem>();
-        SearchResultItem searchResultItem = new SearchResultItem();
 
         Elements elements = doc.select("div.category-products > div.product-grid-container");
         for (Element e : elements) {
+            SearchResultItem searchResultItem = new SearchResultItem();
             String productTitle = e.select("span.product-title").first().text();
             searchResultItem.setProductTitle(productTitle);
 

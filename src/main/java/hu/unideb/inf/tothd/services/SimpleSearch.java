@@ -1,13 +1,13 @@
 package hu.unideb.inf.tothd.services;
 
 import hu.unideb.inf.tothd.model.SearchResults;
-import hu.unideb.inf.tothd.parser.WatchSearchResultParser;
+import hu.unideb.inf.tothd.parser.SearchResultParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import java.io.IOException;
 
-public class SimpleSearch extends WatchSearchResultParser {
+public class SimpleSearch extends SearchResultParser {
 
     private static final String SEARCH_URI = "http://shop.us.longines.com/catalogsearch/result/?q=";
 

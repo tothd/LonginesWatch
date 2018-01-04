@@ -1,4 +1,4 @@
-package hu.unideb.inf.tothd.impl;
+package hu.unideb.inf.tothd.representation;
 
 import hu.unideb.inf.tothd.model.SearchResults;
 import hu.unideb.inf.tothd.services.SimpleSearch;
