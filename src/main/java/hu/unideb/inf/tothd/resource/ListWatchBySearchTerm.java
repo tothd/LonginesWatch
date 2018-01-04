@@ -9,7 +9,7 @@ import org.restlet.resource.ServerResource;
 
 import java.io.IOException;
 
-public class WatchListBySearchTerm extends ServerResource {
+public class ListWatchBySearchTerm extends ServerResource {
 
 
     @Get("json|xml")

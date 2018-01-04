@@ -13,7 +13,7 @@ public class SingleWatchService {
     public SingleWatchService() {
     }
 
-    public Watch doSearch(String href) throws IOException {
+    public Watch find(String href) throws IOException {
         String url = SHOP_URI + href;
         Document doc = Jsoup.connect(url).userAgent("Mozzila").get();
         WatchParser wp = new WatchParser();

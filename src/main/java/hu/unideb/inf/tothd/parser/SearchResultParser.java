@@ -76,6 +76,10 @@ public class SearchResultParser {
         Elements elements = doc.select("div.category-products > div.product-grid-container");
         for (Element e : elements) {
             SearchResultItem searchResultItem = new SearchResultItem();
+
+            String name = e.select("a").first().attr("title");
+            searchResultItem.setName(name);
+
             String productTitle = e.select("span.product-title").first().text();
             searchResultItem.setProductTitle(productTitle);
 

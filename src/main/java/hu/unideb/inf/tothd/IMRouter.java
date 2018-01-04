@@ -1,4 +1,4 @@
-package hu.unideb.inf.tothd.router;
+package hu.unideb.inf.tothd;
 
 import org.restlet.Context;
 import org.restlet.routing.Router;

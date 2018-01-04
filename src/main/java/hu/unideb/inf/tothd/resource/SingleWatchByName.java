@@ -19,7 +19,7 @@ public class SingleWatchByName extends ServerResource {
         SingleWatchService singleWatchService = new SingleWatchService();
 
         try {
-            return singleWatchService.doSearch(WATCH_URI + watchName);
+            return singleWatchService.find(WATCH_URI + watchName);
         } catch (IOException e) {
             e.printStackTrace();
         }

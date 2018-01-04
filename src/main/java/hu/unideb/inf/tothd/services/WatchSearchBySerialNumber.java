@@ -18,7 +18,7 @@ public class WatchSearchBySerialNumber {
 
         String link = doc.select("div.product-grid-container > a").get(0).attr("abs:href");
         SingleWatchService singleWatchService = new SingleWatchService();
-        return singleWatchService.doSearch(link.replace("http://shop.us.longines.com",""));
+        return singleWatchService.find(link.replace("http://shop.us.longines.com",""));
     }
 
 }
