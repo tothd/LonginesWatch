@@ -1,7 +1,6 @@
 package hu.unideb.inf.tothd.parser;
 
 import hu.unideb.inf.tothd.model.*;
-import hu.unideb.inf.tothd.model.watch.*;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;

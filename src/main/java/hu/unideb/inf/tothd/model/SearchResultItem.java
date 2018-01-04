@@ -5,12 +5,13 @@ import javax.xml.bind.annotation.*;
 
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(
-        propOrder = {
-                "productTitle",
-                "productSubtitle",
-                "price",
-        }
+@XmlType(propOrder = {
+        "productTitle",
+        "productSubtitle",
+        "price",
+        "imageURI",
+        "watchURI"
+}
 )
 public class SearchResultItem {
 
@@ -26,14 +27,22 @@ public class SearchResultItem {
     @XmlElement(required = true)
     private Price price;
 
+    @XmlElement(required = true)
+    private String imageURI;
+
+    @XmlElement(required = true)
+    private String watchURI;
+
     public SearchResultItem() {
     }
 
-    public SearchResultItem(String uri, String productTitle, String productSubtitle, Price price) {
+    public SearchResultItem(String uri, String productTitle, String productSubtitle, Price price, String imageURI, String watchURI) {
         this.uri = uri;
         this.productTitle = productTitle;
         this.productSubtitle = productSubtitle;
         this.price = price;
+        this.imageURI = imageURI;
+        this.watchURI = watchURI;
     }
 
     public String getUri() {
@@ -66,6 +75,22 @@ public class SearchResultItem {
 
     public void setPrice(Price price) {
         this.price = price;
+    }
+
+    public String getImageURI() {
+        return imageURI;
+    }
+
+    public void setImageURI(String imageURI) {
+        this.imageURI = imageURI;
+    }
+
+    public String getWatchURI() {
+        return watchURI;
+    }
+
+    public void setWatchURI(String watchURI) {
+        this.watchURI = watchURI;
     }
 }
 

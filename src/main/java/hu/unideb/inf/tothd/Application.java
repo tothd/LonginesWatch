@@ -1,8 +1,8 @@
 package hu.unideb.inf.tothd;
 
-import hu.unideb.inf.tothd.representation.SingleWatchByName;
-import hu.unideb.inf.tothd.representation.SingleWatchBySerialNumber;
-import hu.unideb.inf.tothd.representation.WatchListBySearchTerm;
+import hu.unideb.inf.tothd.resource.SingleWatchByName;
+import hu.unideb.inf.tothd.resource.SingleWatchBySerialNumber;
+import hu.unideb.inf.tothd.resource.WatchListBySearchTerm;
 import hu.unideb.inf.tothd.router.IMRouter;
 import org.restlet.Restlet;
 import org.restlet.Server;

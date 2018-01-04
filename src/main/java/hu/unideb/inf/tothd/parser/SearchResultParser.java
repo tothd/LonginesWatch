@@ -3,7 +3,6 @@ package hu.unideb.inf.tothd.parser;
 import hu.unideb.inf.tothd.model.Price;
 import hu.unideb.inf.tothd.model.SearchResultItem;
 import hu.unideb.inf.tothd.model.SearchResults;
-import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -19,7 +18,7 @@ public class SearchResultParser {
 
     public static final int MAX_ITEMS = 60;
     public static final int FROM = 1;
-    public static final int MAXIMUM_WATCH_IN_ONE_PAGE = 35;
+    public static final int MAXIMUM_WATCH_IN_ONE_PAGE = 36;
 
     private int maxItems = MAX_ITEMS;
 
@@ -44,7 +43,12 @@ public class SearchResultParser {
         }
         int totalItems = 0;
         try {
-            totalItems = Integer.parseInt(doc.select("p.amount").first().text().replaceAll("\\D+", ""));
+            String amount = doc.select("p.amount").first().text();
+            if (amount.contains("of")) {
+                totalItems = Integer.parseInt(amount.substring(amount.length() - 3).trim());
+            } else {
+                totalItems = Integer.parseInt(amount.replaceAll("\\D+", ""));
+            }
         } catch (Exception e) {
             throw new IOException("Malformed document");
         }
@@ -57,9 +61,9 @@ public class SearchResultParser {
         SearchResults searchResults = new SearchResults();
         searchResults.setItemsTotal(totalItems);
         searchResults.setFrom(FROM);
-        if(totalItems>MAXIMUM_WATCH_IN_ONE_PAGE){
+        if (totalItems > MAXIMUM_WATCH_IN_ONE_PAGE) {
             searchResults.setTo(MAXIMUM_WATCH_IN_ONE_PAGE);
-        }else{
+        } else {
             searchResults.setTo(totalItems);
         }
         searchResults.setItems(extractItems(doc));
@@ -78,9 +82,15 @@ public class SearchResultParser {
             String productSubtitle = e.select("span.product-subtitle").first().text();
             searchResultItem.setProductSubtitle(productSubtitle);
 
-            Price price = new Price(
-                    new BigDecimal(e.select("span.price").first().text().replaceAll("[^\\d.-]", "")), currency);
+            Price price = new Price(new BigDecimal(e.select("span.price")
+                    .first().text().replaceAll("[^\\d.-]", "")), currency);
             searchResultItem.setPrice(price);
+
+            String imageURI = e.select("span.product-image > img").first().attr("abs:src");
+            searchResultItem.setImageURI(imageURI);
+
+            String watchURI = e.select("a").first().attr("abs:href");
+            searchResultItem.setWatchURI(watchURI);
 
             items.add(searchResultItem);
         }

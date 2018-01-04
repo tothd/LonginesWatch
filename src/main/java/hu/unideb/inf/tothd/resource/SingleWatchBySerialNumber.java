@@ -1,4 +1,4 @@
-package hu.unideb.inf.tothd.representation;
+package hu.unideb.inf.tothd.resource;
 
 import hu.unideb.inf.tothd.model.Watch;
 import hu.unideb.inf.tothd.services.WatchSearchBySerialNumber;

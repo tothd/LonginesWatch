@@ -1,4 +1,4 @@
-package hu.unideb.inf.tothd.model.watch;
+package hu.unideb.inf.tothd.model;
 
 import org.apache.commons.lang3.builder.ReflectionToStringBuilder;
 
@@ -8,7 +8,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlValue;
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@javax.xml.bind.annotation.XmlType(namespace = "http://www.inf.unideb.hu/Longines")
 public class Movement {
 
     @XmlValue
