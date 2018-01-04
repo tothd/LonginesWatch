@@ -2,6 +2,7 @@ package hu.unideb.inf.tothd;
 
 import hu.unideb.inf.tothd.impl.SingleWatchByName;
 import hu.unideb.inf.tothd.impl.SingleWatchBySerialNumber;
+import hu.unideb.inf.tothd.impl.WatchListBySearchTerm;
 import hu.unideb.inf.tothd.router.IMRouter;
 import org.restlet.Application;
 import org.restlet.Restlet;
@@ -30,6 +31,7 @@ public class LonginesWatchApplication extends Application {
         IMRouter router = new IMRouter(getContext(), PATH, PORT);
         router.attach("/watch-selector/men/{name}", SingleWatchByName.class);
         router.attach("/watchSearch?sn={serialNumber}", SingleWatchBySerialNumber.class);
+        router.attach("/watchList?term={term}", WatchListBySearchTerm.class);
         return router.getRouter();
     }
 

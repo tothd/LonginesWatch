@@ -503,11 +503,5 @@ public class Watch {
 		watch.setMovement(movement);
 
 		watch.setPrice(new Price(new BigDecimal("1,050"), "USD"));
-
-//		try {
-////			hu.unideb.inf.jaxb.JAXBUtil.toXML(watch, System.out);
-//		} catch (javax.xml.bind.JAXBException e) {
-//			e.printStackTrace();
-//		}
 	}
 }

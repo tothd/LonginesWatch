@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.*;
 )
 public class SearchResultItem {
 
-    @XmlAttribute(required = true)
+    @XmlAttribute(required = false)
     private String uri;
 
     @XmlElement(required = false)
