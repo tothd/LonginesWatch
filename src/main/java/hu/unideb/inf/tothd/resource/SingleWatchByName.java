@@ -13,16 +13,16 @@ public class SingleWatchByName extends ServerResource {
     private final static String WATCH_URI = "/watch-selector/";
 
     @Get("json|xml")
-    public Watch represent() {
+    public Watch represent() throws IOException {
         String watchName = getAttribute("name");
 
         SingleWatchService singleWatchService = new SingleWatchService();
 
-        try {
-            return singleWatchService.find(WATCH_URI + watchName);
-        } catch (IOException e) {
-            e.printStackTrace();
+        Watch watch =singleWatchService.find(WATCH_URI + watchName);
+
+        if (watch==null){
+            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
         }
-        throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+        return watch;
     }
 }

@@ -13,16 +13,16 @@ public class ListWatchBySearchTerm extends ServerResource {
 
 
     @Get("json|xml")
-    public SearchResults represent() {
+    public SearchResults represent() throws IOException {
         String term = getAttribute("term");
 
         SimpleSearch simpleSearch = new SimpleSearch();
 
-        try {
-            return simpleSearch.doSearch(term);
-        } catch (IOException e) {
-            e.printStackTrace();
+        SearchResults result = simpleSearch.doSearch(term);
+
+        if (result==null){
+            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
         }
-        throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+        return result;
     }
 }

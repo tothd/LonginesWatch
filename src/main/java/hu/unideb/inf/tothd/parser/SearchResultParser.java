@@ -37,25 +37,34 @@ public class SearchResultParser {
     }
 
     private int getTotalItems(Document doc) throws IOException {
+        if(doc==null){
+            return 0;
+        }
         if (doc.select("p.note.msg").text().equals("Your search returns no results.")) {
             return 0;
         }
         int totalItems = 0;
         try {
-            String amount = doc.select("p.amount").first().text();
+
+            Elements select = doc.select("p.amount");
+            if(select==null){
+                return 0;
+            }
+            String amount = select.first().text();
             if (amount.contains("of")) {
                 totalItems = Integer.parseInt(amount.substring(amount.length() - 3).trim());
             } else {
                 totalItems = Integer.parseInt(amount.replaceAll("\\D+", ""));
             }
         } catch (Exception e) {
+            e.printStackTrace();
             throw new IOException("Malformed document");
         }
         return totalItems;
     }
 
     public SearchResults parse(Document doc) throws IOException {
-        int totalItems = getTotalItems(doc);
+        int totalItems = MAX_ITEMS;
 
         SearchResults searchResults = new SearchResults();
         searchResults.setItemsTotal(totalItems);

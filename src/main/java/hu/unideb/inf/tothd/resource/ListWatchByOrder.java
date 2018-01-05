@@ -11,17 +11,17 @@ import java.io.IOException;
 
 public class ListWatchByOrder extends ServerResource {
     @Get("json|xml")
-    public SearchResults represent() {
+    public SearchResults represent() throws IOException {
         String direction = getAttribute("direction");
         String order = getAttribute("order");
 
         WatchListOderBy watchListOderBy = new WatchListOderBy();
 
-        try {
-            return watchListOderBy.doList(direction, order);
-        } catch (IOException e) {
-            e.printStackTrace();
+
+        SearchResults result = watchListOderBy.doList(direction, order);
+        if (result==null){
+            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
         }
-        throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+        return result;
     }
 }

@@ -12,14 +12,14 @@ import java.io.IOException;
 public class SingleWatchBySerialNumber extends ServerResource{
 
     @Get("json|xml")
-    public Watch represent() {
+    public Watch represent() throws IOException {
         String serialNumber = getAttribute("serialNumber");
         WatchSearchBySerialNumber watchSearchBySerialNumber = new WatchSearchBySerialNumber();
-        try {
-            return watchSearchBySerialNumber.doSearch(serialNumber);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+
+            Watch watch = watchSearchBySerialNumber.doSearch(serialNumber);
+            if (watch==null){
+                throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+            }
+            return watch;
     }
 }

@@ -13,11 +13,11 @@ import java.io.IOException;
 
 public class ListWatchByLimitAndPage extends ServerResource {
     @Get("json|xml")
-    public SearchResults represent() {
+    public SearchResults represent() throws IOException {
         String page = getAttribute("page");
         String limit = getAttribute("limit");
 
-        if (page == null || limit==null) {
+        if (page == null || limit == null) {
             WatchList watchList = new WatchList();
             try {
                 return watchList.doList("32", "1");
@@ -27,10 +27,11 @@ public class ListWatchByLimitAndPage extends ServerResource {
         }
 
         WatchList watchList = new WatchList();
-        try {
-            return watchList.doList(limit, page);
-        } catch (Exception e) {
+
+        SearchResults result = watchList.doList(limit, page);
+        if (result == null) {
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
         }
+        return result;
     }
 }

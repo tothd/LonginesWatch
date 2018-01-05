@@ -25,7 +25,7 @@ public class Application extends org.restlet.Application {
     @Override
     public Restlet createInboundRoot() {
         IMRouter router = new IMRouter(getContext(), PATH, PORT);
-        router.attach("/watch/{name}", SingleWatchByName.class);
+        router.attach("/watch?name={name}", SingleWatchByName.class);
         router.attach("/watchSearch?sn={serialNumber}", SingleWatchBySerialNumber.class);
         router.attach("/watchList?term={term}", ListWatchBySearchTerm.class);
         router.attach("/watchList?dir={direction}&order={order}", ListWatchByOrder.class);
