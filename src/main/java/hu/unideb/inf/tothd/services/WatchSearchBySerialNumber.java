@@ -19,7 +19,13 @@ public class WatchSearchBySerialNumber {
 
     public Watch doSearch(String serialNumber) throws IOException {
         String url =SEARCH_URI+serialNumber;
-        Document doc = Jsoup.connect(url).userAgent("Mozzila").get();
+        Document doc = null;
+        try{
+            doc = Jsoup.connect(url).userAgent("Mozzila").get();
+        }catch (Exception e){
+            throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
+        }
+
 
         Elements elements = doc.select("div.product-grid-container > a");
 

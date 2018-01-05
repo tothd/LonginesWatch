@@ -17,14 +17,16 @@ public class SingleWatchService {
 
     public Watch find(String href) throws IOException {
         String url = SHOP_URI + href;
+        Watch watch=null;
         try {
             Document doc = Jsoup.connect(url).userAgent("Mozzila").get();
+            WatchParser wp = new WatchParser();
+            watch = wp.parse(url);
         }catch (Exception e){
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);
         }
 
-        WatchParser wp = new WatchParser();
-        Watch watch = wp.parse(url);
+
 
         if (watch==null){
             throw new ResourceException(Status.CLIENT_ERROR_NOT_FOUND);

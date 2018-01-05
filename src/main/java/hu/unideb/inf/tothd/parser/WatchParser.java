@@ -46,11 +46,17 @@ public class WatchParser {
         // Get serial number
         watch.setSerialNumber(doc.select("div.sku").first().text());
 
-        // Get accessories
-        ArrayList<String> accessories = new ArrayList<>();
-        for (Element e : doc.select("div.information > ul > li > ul > li")) {
-            accessories.add(e.text());
-        }
+        ArrayList<String> accessories ;
+        try {
+            // Get accessories
+            accessories = new ArrayList<>();
+            for (Element e : doc.select("div.information > ul > li > ul > li")) {
+                accessories.add(e.text());
+            }
+        }catch (Exception e) {
+                e.printStackTrace();
+                throw new IOException("Malformed document");
+            }
         watch.setAccessories(new Accessories(accessories));
 
         // Get description
@@ -78,6 +84,9 @@ public class WatchParser {
         watch.setBracelet(bracelet);
 
         // Get functions
+        if (doc.select("div.functions > ul > li").first()==null){
+            throw new IOException("Malformed document");
+        }
         List<String> functions = Arrays.asList(doc.select("div.functions > ul > li").last().text()
                 .replace("Main Functions ", "").replace(".", ", ").toLowerCase().split(", "));
         watch.setFunctions(new Functions(functions));
@@ -162,6 +171,7 @@ public class WatchParser {
         // Get price
         Element p = doc.select("div.price-box > span.regular-price > span.price").first();
         watch.setPrice(new Price(new BigDecimal(p.text().replaceAll("[^\\d.-]", "")), currency));
+
 
         return watch;
     }
