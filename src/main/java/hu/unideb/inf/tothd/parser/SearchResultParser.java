@@ -18,7 +18,6 @@ public class SearchResultParser {
 
     public static final int MAX_ITEMS = 60;
     public static final int FROM = 1;
-    public static final int MAXIMUM_WATCH_IN_ONE_PAGE = 36;
 
     private int maxItems = MAX_ITEMS;
 
@@ -60,13 +59,13 @@ public class SearchResultParser {
 
         SearchResults searchResults = new SearchResults();
         searchResults.setItemsTotal(totalItems);
+        searchResults.setItems(extractItems(doc));
         searchResults.setFrom(FROM);
-        if (totalItems > MAXIMUM_WATCH_IN_ONE_PAGE) {
-            searchResults.setTo(MAXIMUM_WATCH_IN_ONE_PAGE);
+        if (totalItems > searchResults.getItems().size()) {
+            searchResults.setTo(searchResults.getItems().size());
         } else {
             searchResults.setTo(totalItems);
         }
-        searchResults.setItems(extractItems(doc));
         return searchResults;
     }
 

@@ -10,7 +10,7 @@ import org.restlet.resource.ServerResource;
 import java.io.IOException;
 
 public class SingleWatchByName extends ServerResource {
-    private final static String WATCH_URI = "/watch-selector/men/";
+    private final static String WATCH_URI = "/watch-selector/";
 
     @Get("json|xml")
     public Watch represent() {

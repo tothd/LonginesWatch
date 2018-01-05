@@ -1,9 +1,6 @@
 package hu.unideb.inf.tothd;
 
-import hu.unideb.inf.tothd.resource.ListWatchByOrder;
-import hu.unideb.inf.tothd.resource.SingleWatchByName;
-import hu.unideb.inf.tothd.resource.SingleWatchBySerialNumber;
-import hu.unideb.inf.tothd.resource.ListWatchBySearchTerm;
+import hu.unideb.inf.tothd.resource.*;
 import org.restlet.Restlet;
 import org.restlet.Server;
 import org.restlet.data.Protocol;
@@ -32,8 +29,7 @@ public class Application extends org.restlet.Application {
         router.attach("/watchSearch?sn={serialNumber}", SingleWatchBySerialNumber.class);
         router.attach("/watchList?term={term}", ListWatchBySearchTerm.class);
         router.attach("/watchList?dir={direction}&order={order}", ListWatchByOrder.class);
+        router.attach("/watchList?limit={limit}&p={page}", ListWatchByLimitAndPage.class);
         return router.getRouter();
     }
-
-
 }
